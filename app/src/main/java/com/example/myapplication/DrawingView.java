@@ -20,6 +20,7 @@ public class DrawingView extends View {
     Random r = new Random();
     int color = Color.BLACK;
 	int touchX = -1, touchY = -1, firstTouchX = -1, firstTouchY = -1;
+    int epaisseur = 1;
 
     private List <TouchCoord> Touchs = new ArrayList<>();
 

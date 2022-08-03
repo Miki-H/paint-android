@@ -92,13 +92,20 @@
         <SeekBar
             android:id="@+id/epaisseurBar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:max="5" />
 
         <TextView
             android:id="@+id/textView3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Bordure" />
+
+        <SeekBar
+            android:id="@+id/borderBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="5" />
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

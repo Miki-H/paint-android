@@ -26,6 +26,7 @@ public class TouchCoord{
 
     private Paint paint;
     private int color = Color.BLACK;
+    private int epaisseur = 1;
     private int left, top, right, bottom;
 
     public TouchCoord(int left, int top, int right, int bottom, int color, Paint paint){

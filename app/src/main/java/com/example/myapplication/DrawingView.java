@@ -16,7 +16,6 @@ import java.util.List;
 
 public class DrawingView extends View {
     private Paint paint = new Paint();
-    // Random r = new Random();
     public int color = Color.BLACK, colorBorder = Color.BLACK;
 	int touchX = -1, touchY = -1, firstTouchX = -1, firstTouchY = -1;
     public int border = 1;

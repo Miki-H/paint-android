@@ -1,6 +1,5 @@
 package com.example.myapplication;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -12,6 +11,7 @@ import com.larswerkman.holocolorpicker.ColorPicker;
 
 public class MainActivity extends AppCompatActivity {
     private DrawingView drawingView;
+    private LinearLayout verticalLayout;
     private ImageButton btnBrush;
     private ImageButton btnNew;
     private ImageButton btnReturn;
@@ -24,36 +24,40 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        this.drawingView = (DrawingView) findViewById(R.id.drawingView);
         this.setUpToolbarEvent();
         this.setUpDefaults();
         this.setUpListeners();
     }
 
     private void setUpToolbarEvent() {
-        this.btnBrush = findViewById(R.id.btnBrush);
-        this.btnNew = findViewById(R.id.btnNew);
-        this.btnReturn = findViewById(R.id.btnReturn);
-        this.borderBar = findViewById(R.id.borderBar);
-        this.borderPicker = findViewById(R.id.borderPicker);
-        this.fillPicker = findViewById(R.id.fillPicker);
+        this.drawingView = (DrawingView) findViewById(R.id.drawingView);
+        this.verticalLayout = (LinearLayout) findViewById(R.id.verticalLayout);
+        this.btnBrush = (ImageButton) findViewById(R.id.btnBrush);
+        this.btnNew = (ImageButton) findViewById(R.id.btnNew);
+        this.btnReturn = (ImageButton) findViewById(R.id.btnReturn);
+        this.borderBar = (SeekBar) findViewById(R.id.borderBar);
+        this.borderPicker = (ColorPicker) findViewById(R.id.borderPicker);
+        this.fillPicker = (ColorPicker) findViewById(R.id.fillPicker);
     };
 
     private void setUpDefaults(){
-        this.borderPicker.setColor(Color.BLACK);
-        this.borderPicker.setOldCenterColor(Color.BLACK);
-        this.fillPicker.setColor(Color.BLACK);
-        this.fillPicker.setOldCenterColor(Color.BLACK);
+        this.verticalLayout.setVisibility(View.INVISIBLE);
+        int defaultColor = this.drawingView.color;
+        this.borderPicker.setColor(defaultColor);
+        this.borderPicker.setOldCenterColor(defaultColor);
+        this.fillPicker.setColor(defaultColor);
+        this.fillPicker.setOldCenterColor(defaultColor);
+    }
+
+    public void changeVerticalLayoutVisibility(){
+        int visibility = (verticalLayout.getVisibility() == View.VISIBLE) ? View.INVISIBLE : View.VISIBLE;
+        verticalLayout.setVisibility(visibility);
     }
 
     private void setUpListeners(){
         this.btnBrush.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                LinearLayout VerticalLayout = (LinearLayout) findViewById(R.id.verticalLayout);
-                int value = (VerticalLayout.getVisibility() == View.VISIBLE) ? View.INVISIBLE : View.VISIBLE;
-                VerticalLayout.setVisibility(value);
-            }
+            public void onClick(View view) { changeVerticalLayoutVisibility(); }
         });
 
         this.btnNew.setOnClickListener(new View.OnClickListener() {
@@ -74,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
 
         this.borderBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
-            public void onProgressChanged(SeekBar seekBar, int i, boolean b) { drawingView.border = i + 1; }
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) { drawingView.border = (i + 1) * 10; }
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) { System.out.println("Start border"); }

@@ -12,15 +12,14 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 
 public class DrawingView extends View {
     private Paint paint = new Paint();
-    Random r = new Random();
-    int color = Color.BLACK;
+    // Random r = new Random();
+    public int color = Color.BLACK, colorBorder = Color.BLACK;
 	int touchX = -1, touchY = -1, firstTouchX = -1, firstTouchY = -1;
-    int epaisseur = 1;
+    public int border = 1;
 
     private List <TouchCoord> Touchs = new ArrayList<>();
 
@@ -34,6 +33,17 @@ public class DrawingView extends View {
         super(context, attrs);
     }
 
+    private void drawing(Canvas canvas, int left, int top, int right, int bottom, int border, int color, int colorBorder){
+        this.paint.setStyle(Paint.Style.FILL);
+        this.paint.setColor(color);
+        canvas.drawRect(left, top, right, bottom, this.paint);
+        this.paint.setStyle(Paint.Style.STROKE);
+        this.paint.setColor(colorBorder);
+        this.paint.setStrokeWidth(border);
+        canvas.drawRect(left, top, right, bottom, this.paint);
+
+    }
+
     @Override
     protected void onDraw(Canvas canvas) {
 
@@ -42,15 +52,26 @@ public class DrawingView extends View {
         Touchs = TouchCoord.getTouchs();
 
         for(int i=0; i<Touchs.size(); i++){
-            paint.setColor(Touchs.get(i).getColor());
-            canvas.drawRect(Touchs.get(i).getLeft() - 100, Touchs.get(i).getTop() - 100, Touchs.get(i).getRight() + 100, Touchs.get(i).getBottom() + 100, paint);
+            drawing(canvas,
+                    Touchs.get(i).getLeft() - 100,
+                    Touchs.get(i).getTop() - 100,
+                    Touchs.get(i).getRight() + 100,
+                    Touchs.get(i).getBottom() + 100,
+                    Touchs.get(i).getBorder(),
+                    Touchs.get(i).getColor(),
+                    Touchs.get(i).getColorBorder());
         }
 
 
         if(touchX!=-1 && touchY != -1){
-            canvas.drawRect(firstTouchX - 100, firstTouchY - 100, touchX + 100, touchY + 100, paint);
-            color = Color.rgb(r.nextInt(255), r.nextInt(255), r.nextInt(255));
-            paint.setColor(color);
+            drawing(canvas,
+                    firstTouchX - 100,
+                    firstTouchY - 100,
+                    touchX + 100,
+                    touchY + 100,
+                    this.border,
+                    this.color,
+                    this.colorBorder);
         }
     }
 
@@ -66,11 +87,8 @@ public class DrawingView extends View {
         touchY = (int) event.getY();
 
         if(event.getAction() == MotionEvent.ACTION_UP){
-            TouchCoord touch_up = new TouchCoord(firstTouchX, firstTouchY, touchX, touchY, color, paint);
-            //Touchs.add(touch_up);
-            touchX = -1;
-            touchY = -1;
-            //color = Color.BLACK;
+            TouchCoord touch_up = new TouchCoord(firstTouchX, firstTouchY, touchX, touchY, border, color, colorBorder, paint);
+            touchX = touchY = -1;
         }
 
         invalidate();

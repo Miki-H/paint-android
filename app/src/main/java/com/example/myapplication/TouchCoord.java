@@ -25,22 +25,33 @@ public class TouchCoord{
     }
 
     private Paint paint;
-    private int color = Color.BLACK;
-    private int epaisseur = 1;
-    private int left, top, right, bottom;
+    private int color = Color.BLACK, colorBorder = Color.BLACK;
 
-    public TouchCoord(int left, int top, int right, int bottom, int color, Paint paint){
+    private int border = 1;
+
+    private int left, top, right, bottom;
+    public TouchCoord(int left, int top, int right, int bottom, int border, int color, int colorBorder, Paint paint){
         this.left = left;
         this.top = top;
         this.right = right;
         this.bottom = bottom;
+        this.border = border;
         this.color = color;
+        this.colorBorder = colorBorder;
         this.paint = paint;
         Touchs.add(this);
     }
 
     public int getColor() {
         return color;
+    }
+
+    public int getColorBorder() {
+        return colorBorder;
+    }
+
+    public int getBorder() {
+        return border;
     }
 
     public Paint getPaint() {

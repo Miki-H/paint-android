@@ -19,7 +19,7 @@ public class DrawingView extends View {
     public int color = Color.BLACK, colorBorder = Color.BLACK;
 	int touchX = -1, touchY = -1, firstTouchX = -1, firstTouchY = -1;
     public int border = 10;
-    public String type = "Rect";
+    public String type = "Line";
 
     private List <Integer> FreeX = new ArrayList<Integer>();
     private List <Integer> FreeY = new ArrayList<Integer>();

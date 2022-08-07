@@ -21,6 +21,10 @@ public class DrawingView extends View {
     public int border = 10;
     public String type = "Rect";
 
+    private List <Integer> FreeX = new ArrayList<Integer>();
+    private List <Integer> FreeY = new ArrayList<Integer>();
+    private TouchCoord touch = null;
+
     private List <TouchCoord> Touchs = new ArrayList<>();
 
     public DrawingView(Context context){
@@ -60,6 +64,16 @@ public class DrawingView extends View {
         drawingShape(canvas, left, top, right, bottom, type, paintToDraw);
     }
 
+    private void drawing(Canvas canvas, List<Integer> X, List<Integer> Y, int border, int color){
+        this.paint.setStrokeWidth(border);
+        this.paint.setColor(color);
+        for(int i=0; i<X.size(); i++){
+            int pointX = X.get(i);
+            int pointY = Y.get(i);
+            canvas.drawPoint(pointX, pointY, this.paint);
+        }
+    }
+
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
@@ -67,53 +81,77 @@ public class DrawingView extends View {
         Touchs = TouchCoord.getTouchs();
 
         for(int i=0; i<Touchs.size(); i++){
-            try {
-                drawing(canvas,
-                        Touchs.get(i).getLeft() - 100,
-                        Touchs.get(i).getTop() - 100,
-                        Touchs.get(i).getRight() + 100,
-                        Touchs.get(i).getBottom() + 100,
-                        Touchs.get(i).getBorder(),
-                        Touchs.get(i).getColor(),
-                        Touchs.get(i).getColorBorder(),
-                        Touchs.get(i).getType());
-            } catch (Exception e) {
-                e.printStackTrace();
+            TouchCoord toDraw = Touchs.get(i);
+            if(toDraw.getType().equals("Free")){
+                drawing(canvas, toDraw.getxList(), toDraw.getyList(), toDraw.getBorder(), toDraw.getColor());
+            }else{
+                try {
+                    drawing(canvas,
+                            toDraw.getLeft() - 100,
+                            toDraw.getTop() - 100,
+                            toDraw.getRight() + 100,
+                            toDraw.getBottom() + 100,
+                            toDraw.getBorder(),
+                            toDraw.getColor(),
+                            toDraw.getColorBorder(),
+                            toDraw.getType());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         }
 
 
         if(touchX!=-1 && touchY != -1){
-            try {
-                drawing(canvas,
-                        firstTouchX - 100,
-                        firstTouchY - 100,
-                        touchX + 100,
-                        touchY + 100,
-                        this.border,
-                        this.color,
-                        this.colorBorder,
-                        this.type);
-            } catch (Exception e) {
-                e.printStackTrace();
+            if (this.type.equals("Free")){
+                drawing(canvas, FreeX, FreeY, this.border, this.colorBorder);
+            }else{
+                try {
+                    drawing(canvas,
+                            firstTouchX - 100,
+                            firstTouchY - 100,
+                            touchX + 100,
+                            touchY + 100,
+                            this.border,
+                            this.color,
+                            this.colorBorder,
+                            this.type);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-
         if(touchX==-1){
             firstTouchX = (int) event.getX();
             firstTouchY = (int) event.getY();
         }
 
-        touchX = (int) event.getX();
-        touchY = (int) event.getY();
+        if(type.equals("Free")){
+            FreeX.add((int) event.getX());
+            FreeY.add((int) event.getY());
+            if (touch == null){
+                touch = new TouchCoord(FreeX, FreeY, border, colorBorder, paint);
+            }else{
+                touch.addToFreeLists((int) event.getX(), (int) event.getY());
+            }
+            if(event.getAction() == MotionEvent.ACTION_UP){
+                FreeX.clear();
+                FreeY.clear();
+                touch = null;
+                touchX = touchY = -1;
+            }
+        }else{
+            touchX = (int) event.getX();
+            touchY = (int) event.getY();
 
-        if(event.getAction() == MotionEvent.ACTION_UP){
-            new TouchCoord(firstTouchX, firstTouchY, touchX, touchY, border, color, colorBorder, type, paint);
-            touchX = touchY = -1;
+            if(event.getAction() == MotionEvent.ACTION_UP){
+                new TouchCoord(firstTouchX, firstTouchY, touchX, touchY, border, color, colorBorder, type, paint);
+                touchX = touchY = -1;
+            }
         }
 
         invalidate();

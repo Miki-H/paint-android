@@ -12,7 +12,7 @@ import com.larswerkman.holocolorpicker.ColorPicker;
 public class MainActivity extends AppCompatActivity {
     private DrawingView drawingView;
     private LinearLayout verticalLayout;
-    private ImageButton btnBrush, btnNew, btnReturn, btnRect, btnOval;
+    private ImageButton btnBrush, btnNew, btnReturn, btnRect, btnOval, btnLine;
     private SeekBar borderBar;
     private ColorPicker borderPicker, fillPicker;
 
@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
         this.btnReturn = (ImageButton) findViewById(R.id.btnReturn);
         this.btnRect = (ImageButton) findViewById(R.id.rectBtn);
         this.btnOval = (ImageButton) findViewById(R.id.ovalBtn);
+        this.btnLine = (ImageButton) findViewById(R.id.lineBtn);
         this.borderBar = (SeekBar) findViewById(R.id.borderBar);
         this.borderPicker = (ColorPicker) findViewById(R.id.borderPicker);
         this.fillPicker = (ColorPicker) findViewById(R.id.fillPicker);
@@ -83,6 +84,11 @@ public class MainActivity extends AppCompatActivity {
         this.btnOval.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) { drawingView.type = "Oval";}
+        });
+
+        this.btnLine.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) { drawingView.type = "Line";}
         });
 
         this.borderBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {

@@ -41,6 +41,9 @@ public class DrawingView extends View {
             case "Oval":
                 canvas.drawOval(left, top, right, bottom, paint);
                 break;
+            case "Line":
+                canvas.drawLine(left + 100, top + 100, right - 100, bottom - 100, paint);
+                break;
             default:
                 throw new Exception("Unrecognizable shape");
         }

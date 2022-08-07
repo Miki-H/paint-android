@@ -30,7 +30,9 @@ public class TouchCoord{
     private int border = 1;
 
     private int left, top, right, bottom;
-    public TouchCoord(int left, int top, int right, int bottom, int border, int color, int colorBorder, Paint paint){
+    private String type;
+
+    public TouchCoord(int left, int top, int right, int bottom, int border, int color, int colorBorder, String type, Paint paint){
         this.left = left;
         this.top = top;
         this.right = right;
@@ -38,8 +40,13 @@ public class TouchCoord{
         this.border = border;
         this.color = color;
         this.colorBorder = colorBorder;
+        this.type = type;
         this.paint = paint;
         Touchs.add(this);
+    }
+
+    public String getType() {
+        return type;
     }
 
     public int getColor() {

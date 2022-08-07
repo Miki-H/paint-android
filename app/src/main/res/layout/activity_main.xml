@@ -18,6 +18,7 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <LinearLayout
+        android:id="@+id/horizontalLayout0"
         android:layout_width="797dp"
         android:layout_height="99dp"
         android:orientation="horizontal"
@@ -56,6 +57,7 @@
         android:layout_width="160dp"
         android:layout_height="969dp"
         android:orientation="vertical"
+        android:scrollbars="vertical"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="156dp">
 
@@ -71,13 +73,13 @@
             android:orientation="vertical">
 
             <ImageButton
-                android:id="@+id/imageButton"
+                android:id="@+id/rectBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:srcCompat="@drawable/ic_rect_foreground" />
 
             <ImageButton
-                android:id="@+id/imageButton2"
+                android:id="@+id/ovalBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:srcCompat="@drawable/ic_circle_foreground" />
@@ -104,7 +106,7 @@
         <com.larswerkman.holocolorpicker.ColorPicker
             android:id="@+id/borderPicker"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" />
 
 
         <TextView
@@ -116,7 +118,7 @@
         <com.larswerkman.holocolorpicker.ColorPicker
             android:id="@+id/fillPicker"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

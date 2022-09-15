@@ -12,7 +12,7 @@ import com.larswerkman.holocolorpicker.ColorPicker;
 public class MainActivity extends AppCompatActivity {
     private DrawingView drawingView;
     private LinearLayout verticalLayout;
-    private ImageButton btnBrush, btnNew, btnReturn, btnRect, btnOval, btnLine, btnFree;
+    private ImageButton btnBrush, btnNew, btnReturn, btnRect, btnSquare, btnOval, btnCircle, btnLine, btnFree;
     private SeekBar borderBar;
     private ColorPicker borderPicker, fillPicker;
 
@@ -33,7 +33,9 @@ public class MainActivity extends AppCompatActivity {
         this.btnNew = (ImageButton) findViewById(R.id.btnNew);
         this.btnReturn = (ImageButton) findViewById(R.id.btnReturn);
         this.btnRect = (ImageButton) findViewById(R.id.rectBtn);
+        this.btnSquare = (ImageButton) findViewById(R.id.squareBtn);
         this.btnOval = (ImageButton) findViewById(R.id.ovalBtn);
+        this.btnCircle = (ImageButton) findViewById(R.id.circleBtn);
         this.btnLine = (ImageButton) findViewById(R.id.lineBtn);
         this.btnFree = (ImageButton) findViewById(R.id.freeBtn);
         this.borderBar = (SeekBar) findViewById(R.id.borderBar);
@@ -81,6 +83,22 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 drawingView.type = "Rect";
+                fillPicker.setVisibility(View.VISIBLE);
+            }
+        });
+
+        this.btnSquare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                drawingView.type = "Square";
+                fillPicker.setVisibility(View.VISIBLE);
+            }
+        });
+
+        this.btnCircle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                drawingView.type = "Circle";
                 fillPicker.setVisibility(View.VISIBLE);
             }
         });

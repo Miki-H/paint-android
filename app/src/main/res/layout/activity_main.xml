@@ -19,15 +19,13 @@
 
     <LinearLayout
         android:id="@+id/horizontalLayout0"
-        android:layout_width="406dp"
-        android:layout_height="109dp"
-        android:layout_marginEnd="483dp"
+        android:layout_width="416dp"
+        android:layout_height="115dp"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/drawingView"
+        app:layout_constraintBottom_toBottomOf="@+id/drawingView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/drawingView"
         app:layout_constraintVertical_bias="0.0">
 
         <ImageButton
@@ -59,9 +57,12 @@
         android:layout_height="699dp"
         android:orientation="vertical"
         android:scrollbars="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/drawingView"
+        app:layout_constraintEnd_toEndOf="@+id/drawingView"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/horizontalLayout0"
-        tools:layout_editor_absoluteX="0dp">
+        app:layout_constraintVertical_bias="0.49">
 
         <TextView
             android:id="@+id/textView"
@@ -84,14 +85,14 @@
 
                     <ImageButton
                         android:id="@+id/lineBtn"
-                        android:layout_width="72dp"
-                        android:layout_height="72dp"
+                        android:layout_width="70dp"
+                        android:layout_height="80dp"
                         app:srcCompat="@drawable/icon_line_foreground" />
 
                     <ImageButton
                         android:id="@+id/freeBtn"
-                        android:layout_width="69dp"
-                        android:layout_height="match_parent"
+                        android:layout_width="70dp"
+                        android:layout_height="80dp"
                         app:srcCompat="@drawable/icon_free_foreground" />
 
                 </TableRow>
@@ -102,14 +103,14 @@
 
                     <ImageButton
                         android:id="@+id/rectBtn"
-                        android:layout_width="75dp"
-                        android:layout_height="81dp"
+                        android:layout_width="70dp"
+                        android:layout_height="80dp"
                         app:srcCompat="@drawable/ic_rect_foreground" />
 
                     <ImageButton
                         android:id="@+id/squareBtn"
-                        android:layout_width="67dp"
-                        android:layout_height="match_parent"
+                        android:layout_width="70dp"
+                        android:layout_height="80dp"
                         app:srcCompat="@drawable/icon_square_foreground" />
                 </TableRow>
 
@@ -119,7 +120,14 @@
 
                     <ImageButton
                         android:id="@+id/ovalBtn"
-                        android:layout_width="72dp"
+                        android:layout_width="70dp"
+                        android:layout_height="80dp"
+                        android:scrollbarThumbVertical="@mipmap/icon_square_foreground"
+                        app:srcCompat="@mipmap/icon_square_foreground" />
+
+                    <ImageButton
+                        android:id="@+id/circleBtn"
+                        android:layout_width="70dp"
                         android:layout_height="80dp"
                         app:srcCompat="@drawable/ic_circle_foreground" />
                 </TableRow>

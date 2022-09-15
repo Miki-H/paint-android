@@ -38,12 +38,25 @@ public class DrawingView extends View {
     }
 
     private void drawingShape(Canvas canvas, int left, int top, int right, int bottom, String type, Paint paint) throws Exception {
+        int rest, restV, restH;
         switch(type){
             case "Rect":
                 canvas.drawRect(left, top, right, bottom, paint);
                 break;
+            case "Square":
+                restV = right - left;
+                restH = bottom - top;
+                rest = restV - restH;
+                canvas.drawRect(left, top, right, bottom + rest, paint);
+                break;
             case "Oval":
                 canvas.drawOval(left, top, right, bottom, paint);
+                break;
+            case "Circle":
+                restV = right - left;
+                restH = bottom - top;
+                rest = restV - restH;
+                canvas.drawOval(left, top, right, bottom + rest, paint);
                 break;
             case "Line":
                 canvas.drawLine(left + 100, top + 100, right - 100, bottom - 100, paint);

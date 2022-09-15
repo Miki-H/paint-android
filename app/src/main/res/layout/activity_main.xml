@@ -19,12 +19,12 @@
 
     <LinearLayout
         android:id="@+id/horizontalLayout0"
-        android:layout_width="797dp"
-        android:layout_height="99dp"
+        android:layout_width="406dp"
+        android:layout_height="109dp"
         android:layout_marginEnd="483dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@+id/drawingView"
-        app:layout_constraintEnd_toEndOf="@+id/drawingView"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -57,9 +57,9 @@
         android:id="@+id/verticalLayout"
         android:layout_width="150dp"
         android:layout_height="699dp"
-        android:layout_marginTop="12dp"
         android:orientation="vertical"
         android:scrollbars="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/horizontalLayout0"
         tools:layout_editor_absoluteX="0dp">
 
@@ -90,8 +90,8 @@
 
                     <ImageButton
                         android:id="@+id/freeBtn"
-                        android:layout_width="72dp"
-                        android:layout_height="75dp"
+                        android:layout_width="69dp"
+                        android:layout_height="match_parent"
                         app:srcCompat="@drawable/icon_free_foreground" />
 
                 </TableRow>
@@ -105,6 +105,12 @@
                         android:layout_width="75dp"
                         android:layout_height="81dp"
                         app:srcCompat="@drawable/ic_rect_foreground" />
+
+                    <ImageButton
+                        android:id="@+id/squareBtn"
+                        android:layout_width="67dp"
+                        android:layout_height="match_parent"
+                        app:srcCompat="@drawable/icon_square_foreground" />
                 </TableRow>
 
                 <TableRow
